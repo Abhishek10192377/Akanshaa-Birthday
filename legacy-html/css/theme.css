@@ -1,0 +1,410 @@
+/* ============================================== THEME
+   Midnight plum (lights off)  ->  blush / cream / lavender (lights on)
+   Accents: rose #d6246e, coral #ff6b6b, gold #f6c453, berry #a61e4d
+*/
+:root {
+  --night-1: #12061f;
+  --night-2: #2a0f45;
+  --night-3: #4a1259;
+  --day-1: #fff4e6;
+  --day-2: #ffdce8;
+  --day-3: #e9dcff;
+  --rose: #d6246e;
+  --coral: #ff6b6b;
+  --gold: #f6c453;
+  --berry: #a61e4d;
+}
+
+/* Lights-on background lives on <html>; the night sky sits on top and fades away */
+html {
+  min-height: 100%;
+  background: linear-gradient(135deg, var(--day-1), var(--day-2), var(--day-3), var(--day-2), var(--day-1));
+  background-size: 400% 400%;
+  animation: day_drift 18s ease-in-out infinite;
+}
+
+body {
+  min-height: 100vh;
+  background: transparent !important;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: -1;
+  pointer-events: none;
+  transition: opacity 5s linear;
+}
+
+/* Night sky */
+body::before {
+  background:
+    radial-gradient(ellipse at 50% 110%, var(--night-3) 0%, transparent 60%),
+    linear-gradient(180deg, var(--night-1) 0%, var(--night-2) 100%);
+}
+
+/* Stars */
+body::after {
+  background-image:
+    radial-gradient(1.5px 1.5px at 8% 14%, #fff, transparent),
+    radial-gradient(1px 1px at 19% 62%, #ffe9a8, transparent),
+    radial-gradient(2px 2px at 27% 28%, #fff, transparent),
+    radial-gradient(1px 1px at 36% 78%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 44% 9%, #ffd6e7, transparent),
+    radial-gradient(1px 1px at 53% 47%, #fff, transparent),
+    radial-gradient(2px 2px at 61% 20%, #ffe9a8, transparent),
+    radial-gradient(1px 1px at 68% 68%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 76% 36%, #fff, transparent),
+    radial-gradient(1px 1px at 84% 82%, #ffd6e7, transparent),
+    radial-gradient(2px 2px at 91% 12%, #fff, transparent),
+    radial-gradient(1px 1px at 96% 55%, #ffe9a8, transparent);
+  animation: twinkle 3.5s ease-in-out infinite;
+}
+
+body.peach::before,
+body.peach::after {
+  opacity: 0;
+}
+
+@keyframes day_drift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.45; }
+  50%      { opacity: 1; }
+}
+
+.loading {
+  background: var(--night-1);
+}
+
+/* ============================================== INTRO
+*/
+.intro {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  padding: 0 16px;
+  transform: translateY(-50%);
+  text-align: center;
+  pointer-events: none;
+  z-index: 50;
+  animation: intro_in 2.5s ease both;
+}
+
+.intro span {
+  display: block;
+}
+
+.intro-small {
+  font-family: 'Signika', sans-serif;
+  font-size: 20px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #ffd6e7;
+}
+
+.intro-name {
+  font-family: 'Happy', 'Signika', sans-serif;
+  font-size: 120px;
+  line-height: 1.2;
+  color: var(--gold);
+  text-shadow: 0 0 24px rgba(246, 196, 83, 0.6), 0 0 60px rgba(214, 36, 110, 0.7);
+  animation: name_glow 3s ease-in-out infinite;
+}
+
+@keyframes intro_in {
+  from { opacity: 0; transform: translateY(-40%); }
+  to   { opacity: 1; transform: translateY(-50%); }
+}
+
+@keyframes name_glow {
+  0%, 100% { text-shadow: 0 0 24px rgba(246, 196, 83, 0.5), 0 0 60px rgba(214, 36, 110, 0.6); }
+  50%      { text-shadow: 0 0 36px rgba(246, 196, 83, 0.9), 0 0 90px rgba(214, 36, 110, 0.9); }
+}
+
+@media only screen and (max-width: 768px) {
+  .intro-name { font-size: 64px; }
+  .intro-small { font-size: 14px; letter-spacing: 2px; }
+}
+
+/* ============================================== BUTTONS
+*/
+.navbar-fixed-bottom {
+  border: 0;
+  padding-bottom: 22px;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:active:focus,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50px;
+  padding: 13px 34px;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  color: #fff;
+  background-color: var(--rose);
+  background-image: linear-gradient(135deg, var(--rose) 0%, var(--coral) 100%);
+  box-shadow: 0 8px 24px rgba(214, 36, 110, 0.45), 0 0 0 6px rgba(246, 196, 83, 0.18);
+  outline: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: btn_pulse 2.2s ease-in-out infinite;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 12px 30px rgba(214, 36, 110, 0.6), 0 0 0 8px rgba(246, 196, 83, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+@keyframes btn_pulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(214, 36, 110, 0.45), 0 0 0 4px rgba(246, 196, 83, 0.15); }
+  50%      { box-shadow: 0 8px 28px rgba(214, 36, 110, 0.6), 0 0 0 10px rgba(246, 196, 83, 0.28); }
+}
+
+/* ============================================== PHOTOS
+*/
+.album-photo {
+  border: 8px solid #fff;
+  border-bottom-width: 26px;
+  border-radius: 4px;
+  box-shadow: 0 14px 34px rgba(74, 18, 89, 0.3);
+  cursor: zoom-in;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.album-photo:hover {
+  box-shadow: 0 20px 44px rgba(214, 36, 110, 0.4);
+}
+
+.profile-img {
+  border: 5px solid #fff;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 4px var(--gold), 0 12px 28px rgba(74, 18, 89, 0.35);
+}
+
+.lightbox {
+  background: rgba(18, 6, 31, 0.88);
+}
+
+.lightbox img {
+  border: 8px solid #fff;
+  border-radius: 6px;
+  box-shadow: 0 0 0 3px var(--gold), 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* ============================================== CAKE
+*/
+.cake:after {
+  background: var(--gold);
+  box-shadow: 0 6px 14px rgba(166, 30, 77, 0.25);
+}
+
+.velas {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(166, 30, 77, 0.3);
+}
+
+.velas:after,
+.velas:before {
+  background: var(--rose);
+}
+
+.cobertura,
+.cobertura:after,
+.cobertura:before {
+  background: #ff9ebb;
+}
+
+.bizcocho {
+  background: #5a2a3c;
+  border-radius: 6px 6px 0 0;
+  box-shadow: 0 10px 24px rgba(74, 18, 89, 0.3);
+}
+
+.bizcocho:after,
+.bizcocho:before {
+  background: rgba(255, 214, 231, 0.85);
+}
+
+.fuego {
+  box-shadow: 0 0 40px 12px rgba(246, 196, 83, 0.45);
+}
+
+/* ============================================== CAKE CUTTING
+   The cut line sits at 62% of the cake box, to the right of the candle
+*/
+#cake_cut {
+  display: none;
+}
+
+/* The message layer sits above everything; don't let it swallow button clicks */
+.message {
+  pointer-events: none;
+}
+
+.navbar-fixed-bottom {
+  z-index: 2500;
+}
+
+/* After the cut the wish is pinned to the bottom of the screen so both lines always fit */
+.message.message-after-cut {
+  position: fixed;
+  top: auto;
+  bottom: 16px;
+  transform: translateX(-50%);
+}
+
+.message.message-after-cut p {
+  font-size: 34px;
+  line-height: 1.3;
+  margin: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .message.message-after-cut p {
+    font-size: 22px;
+  }
+}
+
+.cake-piece {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.9s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.cake-piece .bizcocho {
+  box-shadow: none;
+}
+
+.cake-piece-main {
+  clip-path: inset(-100px 38% -20px -100px);
+}
+
+.cake-piece-slice {
+  clip-path: inset(-100px -100px -20px 62%);
+  transform-origin: 100% 100%;
+}
+
+.cake-cut .cake-piece-main {
+  transform: translateX(-8px);
+}
+
+.cake-cut .cake-piece-slice {
+  transform: translateX(46px) rotate(7deg);
+}
+
+.knife {
+  position: absolute;
+  left: 62%;
+  top: 0;
+  width: 18px;
+  height: 190px;
+  margin-left: -9px;
+  z-index: 30;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-260px);
+  transform-origin: 50% 0;
+}
+
+.knife-handle {
+  width: 18px;
+  height: 62px;
+  border-radius: 9px 9px 3px 3px;
+  background:
+    radial-gradient(circle at 50% 28%, var(--gold) 0 3px, transparent 3.5px),
+    radial-gradient(circle at 50% 68%, var(--gold) 0 3px, transparent 3.5px),
+    linear-gradient(90deg, #5a1230, var(--berry) 45%, #5a1230);
+  box-shadow: 0 3px 0 var(--gold);
+}
+
+.knife-blade {
+  width: 16px;
+  height: 128px;
+  margin: 3px 0 0 1px;
+  background: linear-gradient(90deg, #f8f9fa 0%, #ced4da 45%, #868e96 55%, #dee2e6 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 72%, 0 100%);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.knife-cutting {
+  animation: knife_cut 3.6s ease-in-out forwards;
+}
+
+/* Drop in above the cake, saw down to the plate, then lift away */
+@keyframes knife_cut {
+  0%   { opacity: 0; transform: translateY(-260px) rotate(0deg); }
+  18%  { opacity: 1; transform: translateY(-70px) rotate(0deg); }
+  28%  { opacity: 1; transform: translateY(-20px) rotate(-4deg); }
+  38%  { opacity: 1; transform: translateY(20px) rotate(4deg); }
+  48%  { opacity: 1; transform: translateY(60px) rotate(-4deg); }
+  58%  { opacity: 1; transform: translateY(105px) rotate(0deg); }
+  72%  { opacity: 1; transform: translateY(105px) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(-200px) rotate(0deg); }
+}
+
+.confetti {
+  position: fixed;
+  top: -20px;
+  width: 10px;
+  height: 16px;
+  border-radius: 2px;
+  z-index: 3000;
+  pointer-events: none;
+  animation: confetti_fall linear forwards;
+}
+
+@keyframes confetti_fall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0.8; }
+}
+
+/* ============================================== TEXT
+*/
+.message p {
+  color: var(--berry);
+  text-shadow: 0 2px 0 #fff, 0 0 18px rgba(255, 255, 255, 0.9), 0 6px 18px rgba(214, 36, 110, 0.25);
+  letter-spacing: 2px;
+}
+
+.message p strong {
+  color: var(--rose);
+}
+
+.balloons h2 {
+  text-shadow: 0 3px 0 #fff, 0 0 14px rgba(255, 255, 255, 0.95);
+}
+
+.bannar {
+  filter: drop-shadow(0 8px 12px rgba(74, 18, 89, 0.25));
+}
+
+@media only screen and (max-width: 768px) {
+  .message p {
+    font-size: 34px;
+  }
+  .btn-primary {
+    padding: 11px 22px;
+    font-size: 14px;
+  }
+}
