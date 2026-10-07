@@ -19,14 +19,12 @@ export const BULBS = ['yellow', 'red', 'blue', 'green', 'pink', 'orange'];
 // Shown one after another; the last one stays on screen
 export const MESSAGES = [
   `Hey ${NAME}...`,
-  'Today is your special day...',
-  "So let's make it a beautiful one! 🎂",
-  "I'm really glad to know you",
-  "and all those random conversations and meetings we've had. 😊",
-  'Thanks for being a  friend.',
-  'I wish you lots of happiness, success, and amazing memories.',
-  'Keep smiling and keep shining! ✨',
-  'And once again...',
+  'Hey Akanshaa...',
+'Today is your special day...',
+"So let's make it a beautiful one! 🎂",
+'I wish you lots of happiness, success, and amazing memories.',
+'Keep smiling and keep shining! ✨',
+'And once again...', 
   <strong>Happy Birthday, {NAME}! 🎉🎂</strong>,
 ];
 
